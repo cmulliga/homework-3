@@ -148,21 +148,33 @@ ates<- cig.data %>%
 ate1 <- (feols(log_sales ~ log_price, data = ates))
 summary(ate1)
 
+table.one <- ate1$coefficients
+print(table.one)
+
 # Second ATE
 
 ate2 <- (feols(log_sales ~ 1 | log_price ~ log_total_tax, 
              data=ates))
 summary(ate2)
 
+table.two <- ate2$coefficients
+print(table.two)
+
 # Third ATE (First Stage then Reduced Form)
 
 first.stage <- (feols(log_price ~ log_total_tax, data = ates))
 summary(first.stage)
 
+table.three <- first.stage$coefficients
+print(table.three)
+
 price.hat <- predict(first.stage)
 
 second.stage <- (feols(log_sales ~ price.hat, data = ates))
 summary(second.stage)
+
+table.four <- second.stage$coefficients
+print(table.four)
 
 # Repeat of Above under Different Timeframe
 
@@ -174,20 +186,33 @@ new.ates <- cig.data %>% ungroup() %>%
 second.ate1 <- (feols(log_sales ~ log_price, data = new.ates))
 summary(second.ate1)
 
+table.five <- second.ate1$coefficients
+print(table.five)
+
 # Second ATE
 
 second.ate2 <- (feols(log_sales ~ 1 | log_price ~ log_total_tax, 
              data= new.ates))
 summary(second.ate2)
 
+table.six <- second.ate2$coefficients
+print(table.six)
+
+
 # Third ATE (First Stage then Reduced Form)
 
 first.stage2 <- (feols(log_price ~ log_total_tax, data = new.ates))
 summary(first.stage2)
+
+table.seven <- first.stage2$coefficients
+print(table.seven)
 
 price.hat2 <- predict(first.stage2)
 
 second.stage2 <- (feols(log_sales ~ price.hat2, data = new.ates))
 summary(second.stage2)
 
-save.image("submission1/hwk3_workspace.Rdata")
+table.eight <- second.stage2$coefficients
+print(table.eight)
+
+save.image("submission2/hwk3_workspace.Rdata")
