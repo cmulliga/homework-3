@@ -1,0 +1,201 @@
+---
+title: "Homework 3"
+subtitle: "Submission 1"
+author: Conor Mulligan
+format:
+  pdf:
+    output-file: "mulligan-c-hwk3-1"
+    output-ext:  "pdf"
+    header-includes:
+      - \usepackage{float}
+      - \floatplacement{table}{H}
+      - \usepackage{hyperref}
+
+---
+
+First submission of homework 3. 
+
+[Link to Github](https://github.com/cmulliga/homework-3)
+
+
+```{r}
+#| include: false
+
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl, data.table, gdata, fixest, knitr, modelsummary, AER, here)
+```
+
+```{r}
+#| include: false
+#| eval: true
+#| 
+load("C:/Users/ctmul/Emory_Files/ECON_470-1/homework-3/submission1/hwk3_workspace.Rdata")
+```
+
+\newpage
+# Summarize The Data
+
+\vspace{.2in}
+\noindent 1. Present a bar graph showing the proportion of states with a change in their cigarette tax in each year from 1970 to 1985.<br>
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-cap: "Proportion of States with Change in Their Cigarette Tax from 1970 to 1985"
+
+graph.1970.1985
+
+```
+
+\newpage
+\noindent 2. Plot on a single graph the average tax (in 2012 dollars) on cigarettes and the average price of a pack of cigarettes from 1970 to 2018.<br>
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-cap: "Average Tax in 2012 dollars on Cigarettes & Average Price of a Pack of Cigarettes from 1970 to 2018"
+
+graph.1970.2018
+
+```
+
+Wanted to try changing colors of lines on this graph by using geom_line functions but couldn't figure out how to add a legend, so stuck with putting everything into automated colors but having a legend in subsequent graphs.
+
+\newpage
+\noindent 3.Identify the 5 states with the highest increases in cigarette prices (in dollars) over the time period. Plot the average number of packs sold per capita for those states from 1970 to 2018.<br>
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-cap: "Average Number of Packs Sold per Capita among the Five States with the Highest Increases in Cigarette Prices from 1970 to 2018"
+
+graph.top
+
+```
+
+\newpage
+\noindent 4. Identify the 5 states with the lowest increases in cigarette prices (in dollars) over the time period. Plot the average number of packs sold per capita for those states from 1970 to 2018.<br>
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-cap: "Average Number of Packs Sold per Capita among the Five States with the Lowest Increases in Cigarette Prices from 1970 to 2018"
+
+graph.bottom
+
+```
+
+\newpage
+\noindent 5.Compare the trends in sales from the 5 states with the highest price increases to those with the lowest price increases.<br>
+
+Looking at the differences between the two, sales are lower in states where the price increased most versus where it increased less. Intuitively this makes sense.
+
+\newpage
+# Estimate ATEs
+\noindent Now let’s work on estimating a demand curve for cigarettes. Specifically, we’re going to estimate the price elasticity of demand for cigarettes. When explaining your findings, try to limit your discussion just to a couple of sentences.
+
+
+\newpage
+\noindent 6. Focusing only on the time period from 1970 to 1990, regress log sales on log prices to estimate the price elasticity of demand over that period. Interpret your results.<br>
+
+```{r}
+#| echo: false
+#| fig-cap: "Regression Output One"
+
+
+summary(ate1)
+
+```
+
+We see a coefficient of -0.171 which is the estimated price elasticity of demand. This should mean a 1% increase in cigarette price is associated with a decrease of about 0.171% in cigarette sales. 
+
+\newpage
+\noindent 7. Again limiting to 1970 to 1990, regress log sales on log prices using the total (federal and state) cigarette tax (in dollars) as an instrument for log prices. Interpret your results and compare your estimates to those without an instrument. Are they different? If so, why?
+
+
+```{r}
+#| echo: false
+#| fig-cap: "Regression Output Two"
+
+summary(ate2)
+
+```
+
+The estimated coefficient is about 0.502, which means that there is an increase in sales of about .502% per 1% increase in price. This does not make much sense intuitively, so I may have done something wrong when estimating the value.
+
+\newpage
+\noindent 8. Show the first stage and reduced-form results from the instrument.<br>
+
+
+```{r}
+#| echo: false
+#| fig-cap: "First Stage Regression"
+summary(first.stage)
+```
+
+The first stage results show a coefficient of -0.412, which means that a decrease of .412 percent occurs per 1% increase in cigarette price.
+
+```{r}
+#| echo: false
+#| fig-cap: "Reduced Form Regression"
+
+summary(second.stage)
+```
+
+The coefficient for the second stage is .502 which is a different effect than the first stage result.This is unexpected and may be a result of error as one might expect the change to be larger when acounting for the endogeneity of price. It is also positive, which does not make sense intuitively.
+
+\newpage
+\noindent 9. Repeat questions 6-8 focusing on the period from 1991 to 2015.<br>
+
+\noindent 9.1 Focusing only on the time period from 1991 to 2015, regress log sales on log prices to estimate the price elasticity of demand over that period. Interpret your results.<br>
+
+```{r}
+#| echo: false
+#| fig-cap: "Regression Output One (Repeated with Different Dates)"
+
+summary(second.ate1)
+
+```
+
+The coefficient is -0.665 which suggests a 1% increase in price leads to a 0.665% decrease in sales.
+
+\newpage
+\noindent 9.2 Again limiting to 1991 to 2015, regress log sales on log prices using the total (federal and state) cigarette tax (in dollars) as an instrument for log prices. Interpret your results and compare your estimates to those without an instrument. Are they different? If so, why?
+
+
+```{r}
+#| echo: false
+#| fig-cap: "Regression Output Two (Repeated with Different Dates)"
+
+summary(second.ate2)
+
+```
+
+The coefficient of -0.813 suggests that there is a decrease of 0.813 percent per 1% increase in price.
+
+\newpage
+\noindent 9.3 Show the first stage and reduced-form results from the instrument.<br>
+```{r}
+#| echo: false
+#| fig-cap: "First Stage Regression (Repeated with Different Dates)"
+
+summary(first.stage2)
+```
+
+
+```{r}
+#| echo: false
+#| fig-cap: "Reduced Form Regression (Repeated with Different Dates)"
+
+summary(second.stage2)
+```
+
+The coefficient of -0.813 means a 0.813 percent sales decrease for every 1 percent increase in price. This is different than the first reduced form output which was positive, meaning the difference is substantial.
+
+\newpage
+\noindent 10. Compare your elasticity estimates from 1970-1990 versus those from 1991-2015. Are they different? If so, why?.<br>
+
+The estimated price elasticity of demand is positive in the first and negative in the second. The negative elasticity in the second model suggests that a decrease in price means an increase in sales. I likely did something wrong to have the first elasticity be positive.
