@@ -1,0 +1,473 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\KOMAoption{captions}{tableheading}
+\usepackage{float}
+\floatplacement{table}{H}
+\usepackage{hyperref}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Homework 3},
+  pdfauthor={Conor Mulligan},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Homework 3}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Submission 2}
+\author{Conor Mulligan}
+\date{}
+
+\begin{document}
+\maketitle
+
+Second submission of homework 3.
+
+\href{https://github.com/cmulliga/homework-3}{Link to Github}
+
+\newpage
+
+\section{Summarize The Data}\label{summarize-the-data}
+
+\vspace{.2in}
+
+\noindent 1. Present a bar graph showing the proportion of states with a
+change in their cigarette tax in each year from 1970 to 1985.
+
+\begin{figure}[H]
+
+{\centering \includegraphics{hwk3_files/figure-pdf/unnamed-chunk-3-1.pdf}
+
+}
+
+\caption{Proportion of States with Change in Their Cigarette Tax from
+1970 to 1985}
+
+\end{figure}%
+
+\newpage
+
+\noindent 2. Plot on a single graph the average tax (in 2012 dollars) on
+cigarettes and the average price of a pack of cigarettes from 1970 to
+2018.
+
+\begin{figure}[H]
+
+{\centering \includegraphics{hwk3_files/figure-pdf/unnamed-chunk-4-1.pdf}
+
+}
+
+\caption{Average Tax in 2012 dollars on Cigarettes \& Average Price of a
+Pack of Cigarettes from 1970 to 2018}
+
+\end{figure}%
+
+\newpage
+
+\noindent 3.Identify the 5 states with the highest increases in
+cigarette prices (in dollars) over the time period. Plot the average
+number of packs sold per capita for those states from 1970 to 2018.
+
+\begin{figure}[H]
+
+{\centering \includegraphics{hwk3_files/figure-pdf/unnamed-chunk-5-1.pdf}
+
+}
+
+\caption{Average Number of Packs Sold per Capita among the Five States
+with the Highest Increases in Cigarette Prices from 1970 to 2018}
+
+\end{figure}%
+
+\newpage
+
+\noindent 4. Identify the 5 states with the lowest increases in
+cigarette prices (in dollars) over the time period. Plot the average
+number of packs sold per capita for those states from 1970 to 2018.
+
+\begin{figure}[H]
+
+{\centering \includegraphics{hwk3_files/figure-pdf/unnamed-chunk-6-1.pdf}
+
+}
+
+\caption{Average Number of Packs Sold per Capita among the Five States
+with the Lowest Increases in Cigarette Prices from 1970 to 2018}
+
+\end{figure}%
+
+\newpage
+
+\noindent 5.Compare the trends in sales from the 5 states with the
+highest price increases to those with the lowest price increases.
+
+Looking at the graphs, the average packs sold decreased as price
+increased over time. States with lower price increases (the second of
+the top 5 graphs) saw less of a decrease in sales per capita. This makes
+sense given price did not increase as much, so sales stayed a bit higher
+than the 5 states that saw greatee price increases.
+
+\newpage
+
+\noindent 6. Focusing only on the time period from 1970 to 1990, regress
+log sales on log prices to estimate the price elasticity of demand over
+that period. Interpret your results.
+
+\begin{verbatim}
+Warning in styling_latex_scale(out, table_info, "down"): Longtable cannot be
+resized.
+\end{verbatim}
+
+\begin{longtable}[t]{lr}
+\caption{Question 6}\tabularnewline
+
+\toprule
+ & Value\\
+\midrule
+(Intercept) & 4.7504020\\
+log\_price & -0.1715396\\
+\bottomrule
+\end{longtable}
+
+We see a coefficient of -0.171 which is the estimated price elasticity
+of demand. This should mean a 1\% increase in cigarette price is
+associated with a decrease of about 0.171\% in cigarette sales.
+
+\newpage
+
+\noindent 7. Again limiting to 1970 to 1990, regress log sales on log
+prices using the total (federal and state) cigarette tax (in dollars) as
+an instrument for log prices. Interpret your results and compare your
+estimates to those without an instrument. Are they different? If so,
+why?
+
+\begin{verbatim}
+Warning in styling_latex_scale(out, table_info, "down"): Longtable cannot be
+resized.
+\end{verbatim}
+
+\begin{longtable}[t]{lr}
+\caption{Question 7}\tabularnewline
+
+\toprule
+ & Value\\
+\midrule
+(Intercept) & 4.9911084\\
+fit\_log\_price & 0.5023735\\
+\bottomrule
+\end{longtable}
+
+The estimated coefficient is about 0.502, which means that there is an
+increase in sales of about .502\% per 1\% increase in price. This does
+not make much sense intuitively, so I may have done something wrong when
+estimating the value.
+
+\newpage
+
+\noindent 8. Show the first stage and reduced-form results from the
+instrument.
+
+\begin{verbatim}
+Warning in styling_latex_scale(out, table_info, "down"): Longtable cannot be
+resized.
+\end{verbatim}
+
+\begin{longtable}[t]{lr}
+\caption{Question 8}\tabularnewline
+
+\toprule
+ & Value\\
+\midrule
+(Intercept) & -0.5035890\\
+log\_total\_tax & -0.4118129\\
+\bottomrule
+\end{longtable}
+
+The first stage results show a coefficient of -0.412, which means that a
+decrease of .412 percent occurs per 1\% increase in cigarette price.
+
+\begin{verbatim}
+Warning in styling_latex_scale(out, table_info, "down"): Longtable cannot be
+resized.
+\end{verbatim}
+
+\begin{longtable}[t]{lr}
+\caption{Question 8 (Part 2)}\tabularnewline
+
+\toprule
+ & Value\\
+\midrule
+(Intercept) & 4.9911084\\
+ & 0.5023735\\
+\bottomrule
+\end{longtable}
+
+The coefficient for the second stage is .502 which is a different effect
+than the first stage result, but the same as my answer for question 7.
+This is unexpected and may be a result of error as one might expect it
+to be negative.
+
+\newpage
+
+\noindent 9. Repeat questions 6-8 focusing on the period from 1991 to
+2015.
+
+\noindent 9.1 Focusing only on the time period from 1991 to 2015,
+regress log sales on log prices to estimate the price elasticity of
+demand over that period. Interpret your results.
+
+\begin{verbatim}
+Warning in styling_latex_scale(out, table_info, "down"): Longtable cannot be
+resized.
+\end{verbatim}
+
+\begin{longtable}[t]{lr}
+\caption{Question 9 (Part 1)}\tabularnewline
+
+\toprule
+ & Value\\
+\midrule
+(Intercept) & 5.0394853\\
+log\_price & -0.6656264\\
+\bottomrule
+\end{longtable}
+
+The coefficient is -0.665 which suggests a 1\% increase in price leads
+to a 0.665\% decrease in sales.
+
+\newpage
+
+\noindent 9.2 Again limiting to 1991 to 2015, regress log sales on log
+prices using the total (federal and state) cigarette tax (in dollars) as
+an instrument for log prices. Interpret your results and compare your
+estimates to those without an instrument. Are they different? If so,
+why?
+
+\begin{verbatim}
+Warning in styling_latex_scale(out, table_info, "down"): Longtable cannot be
+resized.
+\end{verbatim}
+
+\begin{longtable}[t]{lr}
+\caption{Question 9 (Part 2)}\tabularnewline
+
+\toprule
+ & Value\\
+\midrule
+(Intercept) & 5.218896\\
+fit\_log\_price & -0.813109\\
+\bottomrule
+\end{longtable}
+
+The coefficient of -0.813 suggests that there is a decrease of 0.813
+percent per 1\% increase in price.
+
+\newpage
+
+\noindent 9.3 Show the first stage and reduced-form results from the
+instrument.
+
+\begin{verbatim}
+Warning in styling_latex_scale(out, table_info, "down"): Longtable cannot be
+resized.
+\end{verbatim}
+
+\begin{longtable}[t]{lr}
+\caption{Question 9 (Part 3.1)}\tabularnewline
+
+\toprule
+ & Value\\
+\midrule
+(Intercept) & 1.0848265\\
+log\_total\_tax & 0.7263797\\
+\bottomrule
+\end{longtable}
+
+The first stage regression shows a coefficient of 0.726, or a 0.726\%
+increase in price for each 1\% increase in tax.
+
+\begin{verbatim}
+Warning in styling_latex_scale(out, table_info, "down"): Longtable cannot be
+resized.
+\end{verbatim}
+
+\begin{longtable}[t]{lr}
+\caption{Question 9 (Part 3.2)}\tabularnewline
+
+\toprule
+ & Value\\
+\midrule
+(Intercept) & 5.218896\\
+ & -0.813109\\
+\bottomrule
+\end{longtable}
+
+The coefficient of -0.813 means a 0.813 percent sales decrease for every
+1 percent increase in price. This is different than the first reduced
+form output which was positive, meaning the difference is substantial.
+It is also the same as the second calculation from part 9, which is
+interesting (could be wrong).
+
+\newpage
+
+\noindent 10. Compare your elasticity estimates from 1970-1990 versus
+those from 1991-2015. Are they different? If so, why?.
+
+The estimated price elasticity of demand is positive in the first and
+negative in the second. The negative elasticity in the second model
+suggests that a decrease in price means an increase in sales. I likely
+did something wrong to have the first elasticity be positive, as it does
+not make sense intuitively this way. Some of the coefficients in the
+second stage regressions matched earlier calculations, so unsure if thst
+is also wrong.
+
+
+
+\end{document}
