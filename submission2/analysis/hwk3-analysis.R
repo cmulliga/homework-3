@@ -1,7 +1,7 @@
 # Preliminaries
 
 if (!require("pacman")) install.packages("pacman")
-pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl, data.table, gdata, fixest, knitr, here, AER, modelsummary)
+pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl, data.table, gdata, fixest, knitr, here, wesanderson, AER, modelsummary)
 
 # Load Data
 
@@ -26,11 +26,12 @@ proportions <- data.1985 %>%
 # Create Graph
 
 graph.1970.1985 <- ggplot(proportions, aes(x = as.factor(Year), y = Proportion)) +
-  geom_bar(stat = "identity") +
+  geom_bar(stat = "identity", fill = "#12aeb6") +
   labs(x = "Year", 
        y = "Proportion",
        title = "States from 1970 to 1985 with Change in Tax") +
-  theme_classic()
+       theme_classic()
+
 
 print(graph.1970.1985)
 
@@ -46,15 +47,16 @@ avgs <- data.2018 %>%
   summarise(Avg_Tax = mean(tax_dollar, na.rm = TRUE),
             Avg_Price = mean(cost_per_pack, na.rm = TRUE))
 
+fixed.avgs <- gather(avgs, key = "taxprice", value = "value", -Year)
 
 # Create Line Plot
 
-graph.1970.2018 <- ggplot(avgs, aes(x = as.factor(Year)) +
-  geom_line(aes(y = Avg_Tax), color = "darkred", label = "Average Tax") + 
-  geom_line(aes(y = Avg_Price), color="steelblue", label = "Average Price") +
+graph.1970.2018 <- ggplot(fixed.avgs, aes(x = Year, y = value, color = taxprice )) +
+  geom_line() +
   labs(x = "Year", 
-       y = "Values",
-       title = "Avg. Tax & Price of Cigarettes from 1970 to 2018")) +
+       y = "Avg. Tax and Price",
+       title = "Avg. Tax & Price of Cigarettes from 1970 to 2018",
+       color = "Tax & Price") +
   theme_classic()
 
 # If not using color = for legend need to figure out how to add labels

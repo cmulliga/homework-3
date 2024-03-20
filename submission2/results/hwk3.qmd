@@ -1,10 +1,10 @@
 ---
 title: "Homework 3"
-subtitle: "Submission 1"
+subtitle: "Submission 2"
 author: Conor Mulligan
 format:
   pdf:
-    output-file: "mulligan-c-hwk3-1"
+    output-file: "mulligan-c-hwk3-2"
     output-ext:  "pdf"
     header-includes:
       - \usepackage{float}
@@ -13,7 +13,7 @@ format:
 
 ---
 
-First submission of homework 3. 
+Second submission of homework 3. 
 
 [Link to Github](https://github.com/cmulliga/homework-3)
 
@@ -22,14 +22,14 @@ First submission of homework 3.
 #| include: false
 
 if (!require("pacman")) install.packages("pacman")
-pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl, data.table, gdata, fixest, knitr, modelsummary, AER, here)
+pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl, data.table, gdata, fixest, knitr, modelsummary, kableExtra)
 ```
 
 ```{r}
 #| include: false
 #| eval: true
 #| 
-load("C:/Users/ctmul/Emory_Files/ECON_470-1/homework-3/submission1/hwk3_workspace.Rdata")
+load("C:/Users/ctmul/Emory_Files/ECON_470-1/homework-3/submission2/hwk3_workspace.Rdata")
 ```
 
 \newpage
@@ -60,7 +60,6 @@ graph.1970.2018
 
 ```
 
-Wanted to try changing colors of lines on this graph by using geom_line functions but couldn't figure out how to add a legend, so stuck with putting everything into automated colors but having a legend in subsequent graphs.
 
 \newpage
 \noindent 3.Identify the 5 states with the highest increases in cigarette prices (in dollars) over the time period. Plot the average number of packs sold per capita for those states from 1970 to 2018.<br>
@@ -91,11 +90,7 @@ graph.bottom
 \newpage
 \noindent 5.Compare the trends in sales from the 5 states with the highest price increases to those with the lowest price increases.<br>
 
-Looking at the differences between the two, sales are lower in states where the price increased most versus where it increased less. Intuitively this makes sense.
-
-\newpage
-# Estimate ATEs
-\noindent Now let’s work on estimating a demand curve for cigarettes. Specifically, we’re going to estimate the price elasticity of demand for cigarettes. When explaining your findings, try to limit your discussion just to a couple of sentences.
+Looking at the graphs, the average packs sold decreased as price increased over time. States with lower price increases (the second of the top 5 graphs) saw less of a decrease in sales per capita. This makes sense given price did not increase as much, so sales stayed a bit higher than the 5 states that saw greatee price increases. 
 
 
 \newpage
@@ -103,11 +98,13 @@ Looking at the differences between the two, sales are lower in states where the 
 
 ```{r}
 #| echo: false
-#| fig-cap: "Regression Output One"
+#| tbl-cap: Question 6
 
-
-summary(ate1)
-
+options(knitr.kable.NA = 0)
+knitr::kable(table.one, 
+             col.names=c("Value"),
+             format.args=list(big.mark=","), booktabs = TRUE) %>%
+             kable_styling(latex_options=c("scale_down"))
 ```
 
 We see a coefficient of -0.171 which is the estimated price elasticity of demand. This should mean a 1% increase in cigarette price is associated with a decrease of about 0.171% in cigarette sales. 
@@ -118,10 +115,13 @@ We see a coefficient of -0.171 which is the estimated price elasticity of demand
 
 ```{r}
 #| echo: false
-#| fig-cap: "Regression Output Two"
+#| tbl-cap: Question 7
 
-summary(ate2)
-
+options(knitr.kable.NA = 0)
+knitr::kable(table.two, 
+             col.names=c("Value"),
+             format.args=list(big.mark=","), booktabs = TRUE) %>%
+             kable_styling(latex_options=c("scale_down"))
 ```
 
 The estimated coefficient is about 0.502, which means that there is an increase in sales of about .502% per 1% increase in price. This does not make much sense intuitively, so I may have done something wrong when estimating the value.
@@ -132,20 +132,29 @@ The estimated coefficient is about 0.502, which means that there is an increase 
 
 ```{r}
 #| echo: false
-#| fig-cap: "First Stage Regression"
-summary(first.stage)
+#| tbl-cap: Question 8
+
+options(knitr.kable.NA = 0)
+knitr::kable(table.three, 
+             col.names=c("Value"),
+             format.args=list(big.mark=","), booktabs = TRUE) %>%
+             kable_styling(latex_options=c("scale_down"))
 ```
 
 The first stage results show a coefficient of -0.412, which means that a decrease of .412 percent occurs per 1% increase in cigarette price.
 
 ```{r}
 #| echo: false
-#| fig-cap: "Reduced Form Regression"
+#| tbl-cap: Question 8 (Part 2)
 
-summary(second.stage)
+options(knitr.kable.NA = 0)
+knitr::kable(table.four, 
+             col.names=c("Value"),
+             format.args=list(big.mark=","), booktabs = TRUE) %>%
+             kable_styling(latex_options=c("scale_down"))
 ```
 
-The coefficient for the second stage is .502 which is a different effect than the first stage result.This is unexpected and may be a result of error as one might expect the change to be larger when acounting for the endogeneity of price. It is also positive, which does not make sense intuitively.
+The coefficient for the second stage is .502 which is a different effect than the first stage result, but the same as my answer for question 7. This is unexpected and may be a result of error as one might expect it to be negative.
 
 \newpage
 \noindent 9. Repeat questions 6-8 focusing on the period from 1991 to 2015.<br>
@@ -154,10 +163,13 @@ The coefficient for the second stage is .502 which is a different effect than th
 
 ```{r}
 #| echo: false
-#| fig-cap: "Regression Output One (Repeated with Different Dates)"
+#| tbl-cap: Question 9 (Part 1)
 
-summary(second.ate1)
-
+options(knitr.kable.NA = 0)
+knitr::kable(table.five, 
+             col.names=c("Value"),
+             format.args=list(big.mark=","), booktabs = TRUE) %>%
+             kable_styling(latex_options=c("scale_down"))
 ```
 
 The coefficient is -0.665 which suggests a 1% increase in price leads to a 0.665% decrease in sales.
@@ -168,10 +180,13 @@ The coefficient is -0.665 which suggests a 1% increase in price leads to a 0.665
 
 ```{r}
 #| echo: false
-#| fig-cap: "Regression Output Two (Repeated with Different Dates)"
+#| tbl-cap: Question 9 (Part 2)
 
-summary(second.ate2)
-
+options(knitr.kable.NA = 0)
+knitr::kable(table.six, 
+             col.names=c("Value"),
+             format.args=list(big.mark=","), booktabs = TRUE) %>%
+             kable_styling(latex_options=c("scale_down"))
 ```
 
 The coefficient of -0.813 suggests that there is a decrease of 0.813 percent per 1% increase in price.
@@ -180,22 +195,31 @@ The coefficient of -0.813 suggests that there is a decrease of 0.813 percent per
 \noindent 9.3 Show the first stage and reduced-form results from the instrument.<br>
 ```{r}
 #| echo: false
-#| fig-cap: "First Stage Regression (Repeated with Different Dates)"
+#| tbl-cap: Question 9 (Part 3.1)
 
-summary(first.stage2)
+options(knitr.kable.NA = 0)
+knitr::kable(table.seven, 
+             col.names=c("Value"),
+             format.args=list(big.mark=","), booktabs = TRUE) %>%
+             kable_styling(latex_options=c("scale_down"))
 ```
 
+The first stage regression shows a coefficient of 0.726, or a 0.726% increase in price for each 1% increase in tax.
 
 ```{r}
 #| echo: false
-#| fig-cap: "Reduced Form Regression (Repeated with Different Dates)"
+#| tbl-cap: Question 9 (Part 3.2)
 
-summary(second.stage2)
+options(knitr.kable.NA = 0)
+knitr::kable(table.eight, 
+             col.names=c("Value"),
+             format.args=list(big.mark=","), booktabs = TRUE) %>%
+             kable_styling(latex_options=c("scale_down"))
 ```
 
-The coefficient of -0.813 means a 0.813 percent sales decrease for every 1 percent increase in price. This is different than the first reduced form output which was positive, meaning the difference is substantial.
+The coefficient of -0.813 means a 0.813 percent sales decrease for every 1 percent increase in price. This is different than the first reduced form output which was positive, meaning the difference is substantial. It is also the same as the second calculation from part 9, which is interesting (could be wrong).
 
 \newpage
 \noindent 10. Compare your elasticity estimates from 1970-1990 versus those from 1991-2015. Are they different? If so, why?.<br>
 
-The estimated price elasticity of demand is positive in the first and negative in the second. The negative elasticity in the second model suggests that a decrease in price means an increase in sales. I likely did something wrong to have the first elasticity be positive.
+The estimated price elasticity of demand is positive in the first and negative in the second. The negative elasticity in the second model suggests that a decrease in price means an increase in sales. I likely did something wrong to have the first elasticity be positive, as it does not make sense intuitively this way. Some of the coefficients in the second stage regressions matched earlier calculations, so unsure if thst is also wrong.
